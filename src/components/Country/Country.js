@@ -7,6 +7,7 @@ import withAuthorization from '../../hocs/WithAuthorization';
 import withAdminLayout from '../../hocs/WithAdminLayout';
 import withUser from '../../hocs/WithUser';
 import withSearchBox from '../../hocs/WithSearchBox';
+import CountryCreateMutation from './CountryCreateMutation';
 
 const Country = (props) => (
   <React.Fragment>
@@ -24,6 +25,9 @@ export default compose(
   withUser(),
   withAuthorization(),
   withAdminLayout(),
-  withSearchBox(),
+  withSearchBox(
+    /* for create button */
+    CountryCreateMutation
+  ),
   hasLogger(),
 )(Country)

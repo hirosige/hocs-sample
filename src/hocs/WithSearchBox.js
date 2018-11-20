@@ -1,13 +1,36 @@
 import React from 'react'
+import SearchForm from '../components/Shared/SearchFrom';
 
-const withSearchBox = () => WrappedComponent => {
+const withSearchBox = CreateModalComponent => WrappedComponent => {
   return class HOC extends React.Component {
     state = {
-      condition: ""
+      tmpSearchKeywords: {
+        column: "name",
+        condition: "",
+        keyword: ""
+      },
+      searchKeywords: {},
     }
 
-    handleClick = () => {
-      this.setState({ condition: "clicked condition" })
+    handleChange = (e) => {
+      e.preventDefault()
+      this.setState({
+        tmpSearchKeywords: {
+          ...this.state.tmpSearchKeywords,
+          [e.target.name]: e.target.value,
+        }
+      })
+    }
+
+    makeSearchObject = ({ condition, column, keyword }) => {
+      this.setState({
+        searchKeywords: condition ? {[`${column}_${condition}`]: keyword} : {[`${column}`]: keyword}
+      })
+    }
+
+    execSearch = (e) => {
+      e.preventDefault()
+      this.makeSearchObject(this.state.tmpSearchKeywords)
     }
 
     render () {
@@ -16,8 +39,29 @@ const withSearchBox = () => WrappedComponent => {
           <nav className="navbar" role="navigation" aria-label="main navigation" style={{ background: "#17a2b8", fontSize: "1.2rem" }}>
             <div className="navbar-brand">
               <div className="navbar-item" style={{ color: "#ffffff" }}>
-                TOOL BOX
-                <button onClick={this.handleClick}>Search</button>
+                <nav className="level">
+                  <div className="level-left">
+                    <div className="level-item">
+                      
+                    </div>
+                  </div>
+
+                  <div className="level-right">
+                    <div className="level-item">
+                      TOOLBOX
+                    </div>
+                    <div className="level-item">
+                      <CreateModalComponent {...this.props} />
+                    </div>
+                    <div className="level-item">
+                      <SearchForm
+                        {...this.state}
+                        handleChange={this.handleChange}
+                        execSearch={this.execSearch}
+                      />
+                    </div>
+                  </div>
+                </nav>
               </div>
             </div>
           </nav>

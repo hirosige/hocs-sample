@@ -5,7 +5,7 @@ import { Redirect } from 'react-router'
 const withAuthorization = () => WrappedComponent => {
 
   return branch(
-    ({ me, }) => !(me.role === 'ADMIN'),
+    ({ me, }) => me && !(me.role === 'ADMIN'),
     renderComponent(({ location }) =>
       <Redirect to={{
         pathname: '/forbidden',
