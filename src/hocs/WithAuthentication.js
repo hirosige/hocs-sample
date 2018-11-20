@@ -1,11 +1,18 @@
 import React from 'react'
 import { branch, renderComponent } from 'recompose';
+import { isLoggedIn } from '../utils/AuthService';
+import { Redirect } from 'react-router'
 
 const withAuthentication = () => WrappedComponent => {
 
   return branch(
-    ({ isAuthenticated }) => !isAuthenticated,
-    renderComponent(() => <div>Not Authenticated</div>)
+    () => !isLoggedIn(),
+    renderComponent(({ location }) =>
+      <Redirect to={{
+        pathname: '/forbidden',
+        state: { from: location }
+      }} />
+    )
   )(WrappedComponent)
 }
 

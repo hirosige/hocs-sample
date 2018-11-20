@@ -1,15 +1,12 @@
 import React from 'react'
+import { getMe } from '../utils/AuthService'
 
 const withUser = () => WrappedComponent => {
   const WithUser = props => {
-    const user = {
-      'userId': "UXREA09472345",
-      'email': "hirosige1@gmail.com",
-    }
 
     return (
       <div>
-        <WrappedComponent {...props} me={user} />
+        <WrappedComponent {...props} me={getMe()} />
       </div>
     )
   }
