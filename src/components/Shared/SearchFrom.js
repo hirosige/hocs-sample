@@ -22,7 +22,7 @@ const SearchForm = (props) => (
     <div className="field has-addons">
       <div className="control">
         <span className="select">
-          <select name="column" onChange={props.handleChange}>
+          <select name="column" onChange={props.handleChange} style={{ borderRadius: 0 }}>
             <option value="name">Name</option>
             <option value="code">Code</option>
             <option value="slug">Slug</option>
@@ -31,7 +31,7 @@ const SearchForm = (props) => (
       </div>
       <div className="control">
         <span className="select">
-          <select name="condition" onChange={props.handleChange}>
+          <select name="condition" onChange={props.handleChange} style={{ borderRadius: 0 }}>
             {graphcoolConditions.map(({ id, type, name }) => (
               <option key={id} value={type}>{name}</option>
             ))}
@@ -41,6 +41,7 @@ const SearchForm = (props) => (
       <div className="control">
         <input
           className="input"
+          style={{ borderRadius: 0 }}
           type="text"
           name="keyword"
           onChange={props.handleChange}

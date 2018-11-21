@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 const SideMenu = (props) => (
   <React.Fragment>
-    <nav className="navbar" role="navigation" aria-label="main navigation" style={{ background: "#17a2b8", fontSize: "1.2rem" }}>
+    <nav className="navbar" role="navigation" aria-label="main navigation" style={{ background: "#17a2b8", fontSize: "1.2rem", zIndex: 2 }}>
       <div className="navbar-brand">
         <div className="navbar-item" style={{ color: "#ffffff" }}>
           MENU {props.isActive}

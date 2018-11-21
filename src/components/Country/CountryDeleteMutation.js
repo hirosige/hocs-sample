@@ -1,14 +1,6 @@
 import React from 'react';
 import { ApolloConsumer } from 'react-apollo';
-import gql from "graphql-tag";
-
-const DELETE_A_DOG = gql`
-  mutation DeleteDog($id: ID!) {
-    deleteDog(id: $id) {
-      id
-    }
-  }
-`;
+import { DELETE_A_COUNTRY } from '../../queries/Country'
 
 const CountryDeleteMutation = ({ deleteId }) => (
   <ApolloConsumer>
@@ -18,7 +10,7 @@ const CountryDeleteMutation = ({ deleteId }) => (
           className="button is-small is-danger"
           onClick={async () => {
             const { data } = await client.mutate({
-              mutation: DELETE_A_DOG,
+              mutation: DELETE_A_COUNTRY,
               variables: { id: deleteId },
             });
             console.log(data)

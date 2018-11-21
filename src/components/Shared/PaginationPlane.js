@@ -5,11 +5,11 @@ import PageItems from './PageItems';
 
 
 const PaginationPlane = (props) => (
-  <nav className="navbar" role="navigation" aria-label="main navigation" style={{ background: "#444444", margin: 0 }}>
+  <nav className="navbar" style={{ background: "#444444", margin: 0, zIndex: 1 }}>
     <div id="navbarBasicExample" className="navbar-menu">
       <div className="navbar-start">
         <div className="navbar-item">
-          <nav className="pagination is-centered is-small" role="navigation" aria-label="pagination">
+          <nav className="pagination is-centered is-small">
             <PreviousButton
               current={props.currentPage}
               previousPage={props.previousPage}

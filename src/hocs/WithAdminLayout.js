@@ -17,19 +17,49 @@ const withAdminLayout = () => WrappedComponent => {
               </div>
             </div>
             <div className="navbar-end">
-              <div className="navbar-item">
-              </div>
-              <div className="navbar-item">
-                <div className="buttons">
-                  { (isLoggedIn()) ? (
-                      <Link
-                        className="button is-danger"
-                        to="/logout"
-                        style={{ borderRadius: 0 }}
-                      >
-                        LOGOUT
-                      </Link>
-                    ) : (
+                { (isLoggedIn()) ? (
+                    <React.Fragment>
+                      <div className="navbar-item">
+                        <span className="icon" style={{
+                          borderRadius: "50%",
+                          background: "rgb(0, 209, 178)",
+                          color: "#ffffff",
+                          height: "35px",
+                          width: "35px",
+                        }}>
+                          <i className="fas fa-user"></i>
+                        </span>
+                      </div>
+                      <div className="navbar-item">
+                        <div className="dropdown is-active">
+                          <div className="dropdown-trigger">
+                            <button className="button is-small" aria-haspopup="true" aria-controls="dropdown-menu" style={{ background: "rgb(0, 209, 178)", color: "#ffffff", border: 0 }}>
+                              <span>{this.props.me.email}</span>
+                              <span className="icon is-small">
+                                <i className="fas fa-angle-down" aria-hidden="true"></i>
+                              </span>
+                            </button>
+                          </div>
+                          <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                            <div className="dropdown-content">
+                              <div className="dropdown-item">
+                                MY PROFILE
+                              </div>
+                              <hr className="dropdown-divider" />
+                              <Link
+                                className="dropdown-item"
+                                to="/logout"
+                                style={{ borderRadius: 0 }}
+                              >
+                                LOGOUT
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </React.Fragment>
+                  ) : (
+                    <div className="navbar-item">
                       <Link
                         className="button is-danger"
                         to="/login"
@@ -37,10 +67,9 @@ const withAdminLayout = () => WrappedComponent => {
                       >
                         LOGOUT
                       </Link>
-                    )
-                  }
-                </div>
-              </div>
+                    </div>
+                  )
+                }
             </div>
           </nav>
           <div className="columns is-gapless is-multiline is-mobile">

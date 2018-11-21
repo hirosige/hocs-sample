@@ -31,7 +31,36 @@ const GET_COUNTRY_COUNT = gql`
   }
 `
 
+const CREATE_COUNTRY = gql`
+  mutation CreateCountry(
+    $name: String!
+    $code: String!
+    $slug: String!
+  ) {
+    createCountry(
+      name: $name
+      code: $code
+      slug: $slug
+    ) {
+      id
+      name
+      code
+      slug
+    }
+  }
+`;
+
+const DELETE_A_COUNTRY = gql`
+  mutation DeleteCountry($id: ID!) {
+    deleteCountry(id: $id) {
+      id
+    }
+  }
+`;
+
 export {
   GET_COUNTRIES,
-  GET_COUNTRY_COUNT
+  GET_COUNTRY_COUNT,
+  CREATE_COUNTRY,
+  DELETE_A_COUNTRY
 }
