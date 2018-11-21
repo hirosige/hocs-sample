@@ -16,8 +16,12 @@ const getFormattedDate = (date) => {
   return `${year}-${month}-${day} ${hour}:${min}:${second}`
 }
 
-const hasLogger = () => WrappedComponent => {
+const hasLogger = showFlg => WrappedComponent => {
   const HasLogger = props => {
+    if (!showFlg) {
+      return <WrappedComponent {...props} />
+    }
+
     const logMsg = `%cDEBUG%c ${getFormattedDate(new Date())} [${props.componentName}] [${props.transactionType}]`
     console.log(logMsg, 'color: red; font-weight: bold;', '', props)
     return (

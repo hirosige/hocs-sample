@@ -1,33 +1,23 @@
 import React from 'react'
-import { compose, defaultProps } from 'recompose'
-import { withRouter } from 'react-router';
-import hasLogger from '../../hocs/HasLogger'
-import withAuthentication from '../../hocs/WithAuthentication'
-import withAuthorization from '../../hocs/WithAuthorization';
-import withAdminLayout from '../../hocs/WithAdminLayout';
-import withUser from '../../hocs/WithUser';
-import withSearchBox from '../../hocs/WithSearchBox';
-import CountryCreateMutation from './CountryCreateMutation';
+import CountryDeleteMutation from './CountryDeleteMutation';
+import CountryEditMutation from './CountryEditMutation';
 
-const Country = (props) => (
-  <React.Fragment>
-    <div>Country {props.condition}</div>
-  </React.Fragment>
+const Country = ({ country }) => (
+  <tr>
+    <td>{country.name}</td>
+    <td>{country.code}</td>
+    <td>{country.slug}</td>
+    <td>
+      <div className="field has-addons">
+        <div className="control">
+          <CountryEditMutation editItem={country} />
+        </div>
+        <div className="control">
+          <CountryDeleteMutation deleteId={country.id} />
+        </div>
+      </div>
+    </td>
+  </tr>
 )
 
-export default compose(
-  defaultProps({
-    componentName: 'Country',
-    transactionType: 'List',
-  }),
-  withRouter, // via react-router
-  withAuthentication(),
-  withUser(),
-  withAuthorization(),
-  withAdminLayout(),
-  withSearchBox(
-    /* for create button */
-    CountryCreateMutation
-  ),
-  hasLogger(),
-)(Country)
+export default Country

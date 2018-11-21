@@ -2,26 +2,25 @@ import React from 'react'
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 
-const CREATE_COUNTRY = gql`
-  mutation CreateCountry(
+const UPDATE_DOG = gql`
+  mutation UpdateDog(
+    $id: ID!
     $name: String!
-    $code: String!
-    $slug: String!
+    $breed: String!
   ) {
-    createCountry(
+    updateDog(
+      id: $id
       name: $name
-      code: $code
-      slug: $slug
+      breed: $breed
     ) {
       id
       name
-      code
-      slug
+      breed
     }
   }
 `;
 
-class CountryCreateMutation extends React.Component {
+class CountryEditMutation extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -38,24 +37,26 @@ class CountryCreateMutation extends React.Component {
   }
 
   render () {
-    let name
-    let breed
+    let id = this.props.editItem.id
+    let name = this.props.editItem.name
+    let breed = this.props.editItem.breed
 
     return (
       <React.Fragment>
-        <button className="button is-primary" onClick={this.switchModal} style={{ borderRadius: 0 }}>CREATE COUNTRY</button>
+        <button className="button is-primary is-small" onClick={this.switchModal}>EDIT</button>
         <div className={`modal ${this.state.isActive}`}>
           <div className="modal-background"></div>
           <div className="modal-card">
             <Mutation
-              mutation={CREATE_COUNTRY}
+              mutation={UPDATE_DOG}
             >
-              {(createCountry, { data }) => (
+              {(createDog, { data }) => (
                 <form
                   onSubmit={e => {
                     console.log('test')
                     e.preventDefault();
-                    createCountry({ variables: {
+                    createDog({ variables: {
+                      id,
                       name: name.value,
                       breed: breed.value
                     }});
@@ -64,23 +65,19 @@ class CountryCreateMutation extends React.Component {
                     this.switchModal()
                   }}
                 >
-                <header className="modal-card-head" style={{ borderRadius: 0 }}>
-                  <p className="modal-card-title">CREATE COUNTRY</p>
+                <header className="modal-card-head">
+                  <div className="modal-card-title">Update Dog</div>
                   <div className="delete" aria-label="close" onClick={this.switchModal}></div>
                 </header>
                 <section className="modal-card-body">
                   <input
-                    ref={node => {
-                      name = node;
-                    }}
+                    ref={name}
                   />
                   <input
-                    ref={node => {
-                      breed = node;
-                    }}
+                    ref={breed}
                   />
                   </section>
-                <footer className="modal-card-foot" style={{ borderRadius: 0 }}>
+                <footer className="modal-card-foot">
                   <button className="button is-success" type="submit">Save changes</button>
                   <div className="button" onClick={this.switchModal}>Cancel</div>
                 </footer>
@@ -94,4 +91,4 @@ class CountryCreateMutation extends React.Component {
   }
 };
 
-export default CountryCreateMutation
+export default CountryEditMutation

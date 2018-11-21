@@ -6,7 +6,6 @@ import withAuthentication from '../../hocs/WithAuthentication'
 import withAuthorization from '../../hocs/WithAuthorization';
 import withAdminLayout from '../../hocs/WithAdminLayout';
 import withUser from '../../hocs/WithUser';
-import withSearchBox from '../../hocs/WithSearchBox';
 
 const Dashboard = (props) => (
   <React.Fragment>
@@ -24,6 +23,5 @@ export default compose(
   withUser(),
   withAuthorization(),
   withAdminLayout(),
-  withSearchBox(),
   hasLogger(),
 )(Dashboard)

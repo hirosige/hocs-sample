@@ -9,7 +9,7 @@ const withAuthentication = () => WrappedComponent => {
     () => !isLoggedIn(),
     renderComponent(({ location }) =>
       <Redirect to={{
-        pathname: '/forbidden',
+        pathname: '/login',
         state: { from: location }
       }} />
     )

@@ -1,24 +1,24 @@
 import React from 'react'
 
 const graphcoolConditions = [
-  { type: "",                name: "Equals" },
-  { type: "not",             name: "Not Equals" },
-  { type: "in",              name: "In" },
-  { type: "not_in",          name: "Not In" },
-  { type: "lt",              name: "Less Than" },
-  { type: "lte",             name: "Less Than And Equal" },
-  { type: "gt",              name: "Greater Than" },
-  { type: "gte",             name: "Greater Than And Equal" },
-  { type: "contains",        name: "Contains" },
-  { type: "not_contains",    name: "Not Contains" },
-  { type: "starts_with",     name: "Starts With" },
-  { type: "not_starts_with", name: "Not Starts With" },
-  { type: "ends_with",       name: "Ends With" },
-  { type: "not_ends_with",   name: "Not Ends With" }
+  { id:  1, type: "",                name: "Equals" },
+  { id:  2, type: "not",             name: "Not Equals" },
+  { id:  3, type: "in",              name: "In" },
+  { id:  4, type: "not_in",          name: "Not In" },
+  { id:  5, type: "lt",              name: "Less Than" },
+  { id:  6, type: "lte",             name: "Less Than And Equal" },
+  { id:  7, type: "gt",              name: "Greater Than" },
+  { id:  8, type: "gte",             name: "Greater Than And Equal" },
+  { id:  9, type: "contains",        name: "Contains" },
+  { id: 10, type: "not_contains",    name: "Not Contains" },
+  { id: 11, type: "starts_with",     name: "Starts With" },
+  { id: 12, type: "not_starts_with", name: "Not Starts With" },
+  { id: 13, type: "ends_with",       name: "Ends With" },
+  { id: 14, type: "not_ends_with",   name: "Not Ends With" }
 ]
 
 const SearchForm = (props) => (
-  <form onSubmit={props.execSearch}>
+  <form>
     <div className="field has-addons">
       <div className="control">
         <span className="select">
@@ -32,8 +32,8 @@ const SearchForm = (props) => (
       <div className="control">
         <span className="select">
           <select name="condition" onChange={props.handleChange}>
-            {graphcoolConditions.map(({ type, name }) => (
-              <option value={type}>{name}</option>
+            {graphcoolConditions.map(({ id, type, name }) => (
+              <option key={id} value={type}>{name}</option>
             ))}
           </select>
         </span>
@@ -46,11 +46,6 @@ const SearchForm = (props) => (
           onChange={props.handleChange}
           value={props.tmpSearchKeywords.name_contains}
           placeholder="Search Keyword" />
-      </div>
-      <div className="control">
-        <button type="submit" className="button is-danger">
-          Search
-        </button>
       </div>
     </div>
   </form>

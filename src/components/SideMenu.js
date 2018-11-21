@@ -27,5 +27,5 @@ const SideMenu = (props) => (
 
 export default compose(
   withActiveMenu(),
-  hasLogger()
+  hasLogger(true)
 )(SideMenu)
